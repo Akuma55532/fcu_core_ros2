@@ -12,7 +12,7 @@ int main(int argc, char **argv) {
   rclcpp::init(argc,argv);
   auto node = rclcpp::Node::make_shared("fcu_command");
 
-  auto command = node->create_publisher<std_msgs::msg::Int16>("command", 100);
+  auto command = node->create_publisher<std_msgs::msg::Int16>("~/command", 100);
 
   while (rclcpp::ok()) {
     // 获取从键盘输入的数据

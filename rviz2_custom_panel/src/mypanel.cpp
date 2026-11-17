@@ -3,7 +3,7 @@
 void rviz2_custom_panel::Rviz2Panel::CreateNode()
 {
     node = rclcpp::Node::make_shared("fcu_command");
-    cmd_pub = node->create_publisher<std_msgs::msg::Int16>("command", 100);
+    cmd_pub = node->create_publisher<std_msgs::msg::Int16>("~/command", 100);
     batt_sub = node->create_subscription<std_msgs::msg::Float32>(
     "batt_now_001", 100, std::bind(&Rviz2Panel::battHandler, this, std::placeholders::_1));
 

@@ -642,7 +642,7 @@ int main(int argc, char **argv)
     rclcpp::init(argc,argv);
     node = rclcpp::Node::make_shared("fcu_mission");
     tf_broadcaster = std::make_shared<tf2_ros::TransformBroadcaster>(node);
-    auto comm = node->create_subscription<std_msgs::msg::Int16>("command", 100, cmdHandler);
+    auto comm = node->create_subscription<std_msgs::msg::Int16>("/fcu_command/command", 100, cmdHandler);
     auto odom001 = node->create_subscription<nav_msgs::msg::Odometry>("odom_global_001", 100, odom_global001_handler);
     auto odom002 = node->create_subscription<nav_msgs::msg::Odometry>("odom_global_002", 100, odom_global002_handler);
     auto odom003 = node->create_subscription<nav_msgs::msg::Odometry>("odom_global_003", 100, odom_global003_handler);
@@ -652,12 +652,12 @@ int main(int argc, char **argv)
     auto pos_cmd = node->create_subscription<quadrotor_msgs::msg::PositionCommand>("pos_cmd", 100, pos_cmd_handler);
     auto mission_follow = node->create_subscription<std_msgs::msg::Float32MultiArray>("mission_follow", 100, follow_handler);
 
-    mission_pub_001 = node->create_publisher<std_msgs::msg::Float32MultiArray>("mission_001", 100);
-    mission_pub_002 = node->create_publisher<std_msgs::msg::Float32MultiArray>("mission_002", 100);
-    mission_pub_003 = node->create_publisher<std_msgs::msg::Float32MultiArray>("mission_003", 100);
-    mission_pub_004 = node->create_publisher<std_msgs::msg::Float32MultiArray>("mission_004", 100);
-    mission_pub_005 = node->create_publisher<std_msgs::msg::Float32MultiArray>("mission_005", 100);
-    mission_pub_006 = node->create_publisher<std_msgs::msg::Float32MultiArray>("mission_006", 100);
+    mission_pub_001 = node->create_publisher<std_msgs::msg::Float32MultiArray>("~/mission_001", 100);
+    mission_pub_002 = node->create_publisher<std_msgs::msg::Float32MultiArray>("~/mission_002", 100);
+    mission_pub_003 = node->create_publisher<std_msgs::msg::Float32MultiArray>("~/mission_003", 100);
+    mission_pub_004 = node->create_publisher<std_msgs::msg::Float32MultiArray>("~/mission_004", 100);
+    mission_pub_005 = node->create_publisher<std_msgs::msg::Float32MultiArray>("~/mission_005", 100);
+    mission_pub_006 = node->create_publisher<std_msgs::msg::Float32MultiArray>("~/mission_006", 100);
     rclcpp::TimerBase::SharedPtr timer_mission = node->create_wall_timer(
     std::chrono::milliseconds(100), 
     []() {

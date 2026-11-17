@@ -332,22 +332,22 @@ int main (int argc,char ** argv)
     auto loop_rate = rclcpp::Rate(200); // 200Hz
 
     fcu_bridge_instance->cmd = fcu_bridge_instance->node->create_subscription<std_msgs::msg::Int16>(
-      "command", 100, std::bind(&fcu_bridge_006::cmdHandler, fcu_bridge_instance, std::placeholders::_1));
+      "~/command", 100, std::bind(&fcu_bridge_006::cmdHandler, fcu_bridge_instance, std::placeholders::_1));
     fcu_bridge_instance->gnss_sub = fcu_bridge_instance->node->create_subscription<sensor_msgs::msg::NavSatFix>(
       "gnss_global_001", 100, std::bind(&fcu_bridge_006::gnssHandler, fcu_bridge_instance, std::placeholders::_1));
     fcu_bridge_instance->odom_sub = fcu_bridge_instance->node->create_subscription<nav_msgs::msg::Odometry>(
-      "odometry_006", 100, std::bind(&fcu_bridge_006::odomHandler, fcu_bridge_instance, std::placeholders::_1));
+      "~/odometry_006", 100, std::bind(&fcu_bridge_006::odomHandler, fcu_bridge_instance, std::placeholders::_1));
     fcu_bridge_instance->mission_sub = fcu_bridge_instance->node->create_subscription<std_msgs::msg::Float32MultiArray>(
-      "mission_006", 100, std::bind(&fcu_bridge_006::missionHandler, fcu_bridge_instance, std::placeholders::_1));
+      "~/mission_006", 100, std::bind(&fcu_bridge_006::missionHandler, fcu_bridge_instance, std::placeholders::_1));
     fcu_bridge_instance->motion_sub = fcu_bridge_instance->node->create_subscription<geometry_msgs::msg::PoseStamped>(
-      "motion_006", 100, std::bind(&fcu_bridge_006::motionHandler, fcu_bridge_instance, std::placeholders::_1));
-    fcu_bridge_instance->odom_global = fcu_bridge_instance->node->create_publisher<nav_msgs::msg::Odometry>("odom_global_006", 100);
-    fcu_bridge_instance->imu_global = fcu_bridge_instance->node->create_publisher<sensor_msgs::msg::Imu>("imu_global_006", 100);
+      "~/motion_006", 100, std::bind(&fcu_bridge_006::motionHandler, fcu_bridge_instance, std::placeholders::_1));
+    fcu_bridge_instance->odom_global = fcu_bridge_instance->node->create_publisher<nav_msgs::msg::Odometry>("~/odom_global_006", 100);
+    fcu_bridge_instance->imu_global = fcu_bridge_instance->node->create_publisher<sensor_msgs::msg::Imu>("~/imu_global_006", 100);
     fcu_bridge_instance->gnss_global = fcu_bridge_instance->node->create_publisher<sensor_msgs::msg::NavSatFix>("gnss_global_006", 100);
-    fcu_bridge_instance->path_global = fcu_bridge_instance->node->create_publisher<nav_msgs::msg::Path>("path_global_006", 100);
-    fcu_bridge_instance->path_target_pub = fcu_bridge_instance->node->create_publisher<nav_msgs::msg::Path>("path_target_006", 100);
-    fcu_bridge_instance->command = fcu_bridge_instance->node->create_publisher<std_msgs::msg::Int16>("command", 100);
-    fcu_bridge_instance->goal = fcu_bridge_instance->node->create_publisher<geometry_msgs::msg::PoseStamped>("goal_006", 100);
+    fcu_bridge_instance->path_global = fcu_bridge_instance->node->create_publisher<nav_msgs::msg::Path>("~/path_global_006", 100);
+    fcu_bridge_instance->path_target_pub = fcu_bridge_instance->node->create_publisher<nav_msgs::msg::Path>("~/path_target_006", 100);
+    fcu_bridge_instance->command = fcu_bridge_instance->node->create_publisher<std_msgs::msg::Int16>("~/command", 100);
+    fcu_bridge_instance->goal = fcu_bridge_instance->node->create_publisher<geometry_msgs::msg::PoseStamped>("~/goal_006", 100);
     fcu_bridge_instance->batt = fcu_bridge_instance->node->create_publisher<std_msgs::msg::Float32>("batt_now", 100);
 
     std::this_thread::sleep_for(std::chrono::seconds(1));
